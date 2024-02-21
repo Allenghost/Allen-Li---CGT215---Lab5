@@ -2,10 +2,37 @@
 //
 
 #include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+string getCode(string text) {
+    vector<char> charVector({ 'V','F','X','B','L','I','T','Z','J','R','P','H','D','K','N','O','W','S','G','U','Y','Q','M','A','C','E' });
+    string result;
+    for (int i = 0; i < text.length(); i++) {
+        if (text[i] >= 65 && text[i] <= 90) {
+            result += charVector[text[i] - 'A'];
+        }
+        else if (text[i] >= 97 && text[i] <= 122) {
+            char upperCaseLetter = int(text[i]) - 32;
+            char upperCaseCode = charVector[upperCaseLetter - 65];
+            result += (upperCaseCode + 32);
+        }
+        else {
+            result += text[i];
+        }
+    }
+    return result;
+}
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    string text;
+    cout << "Input text to cypher: ";
+    getline(cin, text);
+    string result = getCode(text);
+    cout << "Encoded Message: " << result;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
